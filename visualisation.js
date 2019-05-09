@@ -7,7 +7,7 @@ var width = 600,
 var projection = d3.geoMercator()
     // .fitExtent([ [0, 0], [800, 600] ], counties);
     .center([25.0136, 58.5953])
-    .scale([6000])
+    .scale([5500])
     .translate([width / 2, height / 2]);
 
 // Path
