@@ -109,6 +109,10 @@ function clicked(d) {
         console.log(d.properties.MNIMI);
         vue_app.current_place_name = d.properties.MNIMI;
         vue_app.current_place_population = d.population;
+    } else {
+        // Reset to country level
+        vue_app.current_place_name = 'Estonia';
+        vue_app.current_place_population = 1300000;
     }
 
     if (active.node() === this) return reset();
