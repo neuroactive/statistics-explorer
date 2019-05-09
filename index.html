@@ -40,13 +40,13 @@
                     <!--Details-->
                     <div class="btn-group btn-group-toggle" data-toggle="buttons">
                         <label class="btn btn-secondary active">
-                          <input type="radio" name="options" id="option1" autocomplete="off" checked> Country
+                          <input type="radio" name="options" id="option1" autocomplete="off"> Country
                         </label>
                         <label class="btn btn-secondary">
-                          <input type="radio" name="options" id="option2" autocomplete="off"> County
+                          <input type="radio" name="options" value="county" v-model="zoomLevel" id="option2" autocomplete="off"> County
                         </label>
                         <label class="btn btn-secondary">
-                          <input type="radio" name="options" id="option3" autocomplete="off"> Municipality
+                          <input type="radio" name="options" value="municipality" v-model="zoomLevel" id="option3" autocomplete="off"> Municipality
                         </label>
                     </div>
                     <h2 class="year" style="padding-left: 50px"></h2>
