@@ -5,7 +5,6 @@ html {
 body {
     width: 100%;
     margin: 0 auto;
-    font-size: 1.8rem;
     font-family: Roboto, Verdana, Arial, sans-serif;
     color: #444;
 }
@@ -14,6 +13,10 @@ h1 {
     font-family: Ubuntu;
     font-weight: 300;
     font-size: 3.2rem;
+}
+
+p, nav-link {
+    font-size: 1.6rem;
 }
 
 /* Map-related styles */
