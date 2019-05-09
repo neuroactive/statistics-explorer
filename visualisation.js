@@ -88,7 +88,7 @@ function ready(error, data) {
             });
             tooltip.classed('hidden', false)
                 .attr('style', 'left:' + (mouse[0]) +
-                        'px; top:' + (mouse[1] + 40) + 'px')
+                        'px; top:' + (mouse[1] + 30) + 'px')
                 .html(d.properties.MNIMI);
         })
         .on('mouseout', function() {
