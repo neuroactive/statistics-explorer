@@ -1,6 +1,6 @@
 // Set dimensions
-var width = 800,
-    height = 600,
+var width = 600,
+    height = 400,
     active = d3.select(null);
 
 // Projection
