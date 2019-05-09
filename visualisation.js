@@ -107,7 +107,7 @@ function clicked(d) {
     console.log("Map was clicked.");
     if (typeof d !== 'undefined') {
         console.log(d.properties.MNIMI);
-        current_place_name = d.properties.MNIMI;
+        vue_app.current_place_name = d.properties.MNIMI;
     }
 
     if (active.node() === this) return reset();
