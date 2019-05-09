@@ -62,6 +62,10 @@ function ready(error, data) {
         // geometries: data.objects.asustusyksus.geometries // settlements
     });
 
+    //Tooltip for the mouseover(hover)
+    var tooltip = d3.select('body').append('div')
+            .attr('class', 'hidden tooltip');
+
     // Draw the map
     g.append("g")
         .attr("id", "counties")
@@ -77,7 +81,19 @@ function ready(error, data) {
             // return (value != 0 ? population_colour(value) : "steelblue");
             return population_colour(d.population = population_data.get(d.properties.MKOOD));
         })
-        .on("click", clicked);
+        .on("click", clicked)
+        .on('mousemove', function(d) {
+            var mouse = d3.mouse(svg.node()).map(function(d) {
+                return parseInt(d);
+            });
+            tooltip.classed('hidden', false)
+                .attr('style', 'left:' + (mouse[0]) +
+                        'px; top:' + (mouse[1]+ 50) + 'px')
+                .html(d.properties.MNIMI);
+        })
+        .on('mouseout', function() {
+            tooltip.classed('hidden', true);
+        });;
 
     g.append("path")
         .datum(topojson.mesh(data, data.objects.maakond, function(a, b) { return a !== b; }))
