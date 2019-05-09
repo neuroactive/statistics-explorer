@@ -108,6 +108,7 @@ function clicked(d) {
     if (typeof d !== 'undefined') {
         console.log(d.properties.MNIMI);
         vue_app.current_place_name = d.properties.MNIMI;
+        vue_app.current_place_population = d.population;
     }
 
     if (active.node() === this) return reset();
