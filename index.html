@@ -16,7 +16,7 @@
 </head>
 <body>
 
-<div class="container-fluid mt-4" id="content" v-cloak>
+<div class="container-fluid mt-4" id="content">
 
     <!-- Nav tabs -->
     <ul class="nav nav-tabs">
@@ -40,7 +40,7 @@
                     <svg class="population_by_county" width="800" height="600"></svg>
                 </div>
                 <!--Charts, details, etc-->
-                <div class="col-4">
+                <div class="col-4" v-cloak>
                     <h1>{{ current_place_name }}</h1>
 
                     <p><b>Population:</b> {{ current_place_population }}</p>
