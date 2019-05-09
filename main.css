@@ -64,3 +64,7 @@ div.tooltip {
     color: #333;
     font-weight: 400;
 }
+
+.tab-content {
+    padding-top: 25px;
+}
