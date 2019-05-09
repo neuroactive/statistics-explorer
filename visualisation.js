@@ -47,6 +47,11 @@ d3.queue()
     })
     .await(ready);
 
+
+var legendText = ["", "10%", "", "15%", "", "20%", "", "25%"];
+var legendColors = ["#fff7bc", "#fee391", "#fec44f", "#fe9929", "#ec7014", "#cc4c02", "#993404", "#662506"];
+
+
 // Callback function
 function ready(error, data) {
     if (error) throw error;
@@ -99,6 +104,30 @@ function ready(error, data) {
         .datum(topojson.mesh(data, data.objects.maakond, function(a, b) { return a !== b; }))
         .attr("id", "county_borders")
         .attr("d", path);
+
+    var legend = svg.append("g")
+        .attr("id", "legend");
+
+    var legenditem = legend.selectAll(".legenditem")
+        .data(d3.range(8))
+        .enter()
+        .append("g")
+        .attr("class", "legenditem")
+        .attr("transform", function(d, i) { return "translate(" + i * 31 + ",0)"; });
+
+    legenditem.append("rect")
+        .attr("x", width - 240)
+        .attr("y", 30)
+        .attr("width", 30)
+        .attr("height", 6)
+        .attr("class", "rect")
+        .style("fill", function(d, i) { return legendColors[i]; });
+
+    legenditem.append("text")
+        .attr("x", width - 240)
+        .attr("y", 20)
+        .style("text-anchor", "middle")
+        .text(function(d, i) { return legendText[i]; });
 }
 
 
@@ -131,6 +160,27 @@ function clicked(d) {
         // // Debug
         // console.log("x: " + x + ", y:" + y + " , k: " + k);
 }
+
+function update(year){
+    slider.property("value", year);
+    d3.select(".year").text(year);
+    countyShapes.style("fill", function(d) {
+        return color(d.properties.years[year][0].rate)
+    });
+}
+
+var slider = d3.select(".slider")
+    .append("input")
+    .attr("type", "range")
+    .attr("min", 1996)
+    .attr("max", 2012)
+    .attr("step", 1)
+    .on("input", function() {
+        var year = this.value;
+        update(year);
+    });
+
+update(1996);
 
 
 function reset() {
