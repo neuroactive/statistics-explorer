@@ -4,7 +4,6 @@ html {
 
 body {
     width: 100%;
-    margin: 0 auto;
     font-family: Roboto, Verdana, Arial, sans-serif;
     color: #444 !important;
 }
@@ -40,12 +39,6 @@ path {
     cursor: pointer;
 }
 
-#legend text {
-    font-size: 0.9em;
-    color: #333;
-    font-weight: 400;
-}
-
 .hidden {
     display: none;
 }
@@ -64,4 +57,10 @@ div.tooltip {
     margin-left: auto;
     margin-right: auto;
     max-width: 100%;
+}
+
+#legend text {
+    font-size: 0.9em;
+    color: #333;
+    font-weight: 400;
 }
