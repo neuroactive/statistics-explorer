@@ -3,12 +3,14 @@
 <head>
     <title>Data visualisation test</title>
     <link rel="stylesheet" href="main.css">
+    <!-- Boostrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" crossorigin="anonymous">
 
     <script src="https://d3js.org/d3.v4.min.js"></script>
     <script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
     <script src="https://d3js.org/topojson.v2.min.js"></script>
-    <!-- TODO: Vue.js -->
-    <!-- TODO: JavaScript for test -->
+    <!-- Vue.js -->
+    <script src="//cdnjs.cloudflare.com/ajax/libs/vue/2.5.1/vue.js"></script>
     <link href="//fonts.googleapis.com/css?family=Roboto:300|Ubuntu:300,400,500,700" rel="stylesheet" type="text/css">
 </head>
 <body>
@@ -18,6 +20,17 @@
     <div style="border: 1px solid #ddd">
         <svg class="population_by_county" width="800" height="600"></svg>
     </div>
+
+    <!-- Other files related to Bootstrap -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <!-- Required for Bootstrap - see: https://getbootstrap.com/docs/4.0/getting-started/introduction/#quick-start -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+
+    <!-- JQuery UI -->
+<!--     <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+ -->    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" crossorigin="anonymous"></script>
 
     <script src="visualisation.js"></script>
     <script src="moving_average.js"></script>
