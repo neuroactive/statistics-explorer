@@ -12,7 +12,7 @@ h1 {
     font-family: Ubuntu;
     font-weight: 300;
     font-size: 3.2rem !important;
-    margin-bottom: 1.6rem;
+    margin-bottom: 1.6rem !important;
 }
 
 p, .nav-link {
