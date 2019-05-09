@@ -6,7 +6,7 @@ const vue_app = new Vue({
     el: '#content',
     data: {
         // model
-        current_place_name
+        current_place_name: 'Estonia'
     }
     // },
     // computed: {
