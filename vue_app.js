@@ -1,4 +1,6 @@
+let current_year;
 let current_place_name;
+let current_place_population;
 
 
 // Initialize Vue app
@@ -6,7 +8,9 @@ const vue_app = new Vue({
     el: '#content',
     data: {
         // model
-        current_place_name: 'Estonia'
+        current_year: 2017,
+        current_place_name: 'Estonia',
+        current_place_population: 1300000
     }
     // },
     // computed: {
