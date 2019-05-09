@@ -35,6 +35,12 @@ path {
     cursor: pointer;
 }
 
+#legend text {
+    font-size: 0.9em;
+    color: #333;
+    font-weight: 400;
+}
+
 .hidden {
     display: none;
 }
