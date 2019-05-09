@@ -48,8 +48,8 @@ d3.queue()
     .await(ready);
 
 
-var legendText = ["", "10%", "", "15%", "", "20%", "", "25%"];
-var legendColors = ["#fff7bc", "#fee391", "#fec44f", "#fe9929", "#ec7014", "#cc4c02", "#993404", "#662506"];
+var legendText = ["0", "1000", "5000", "10000", "20000", "50000", "100000", "500000"];
+var legendColors = ["#9ecae1", "#63afd7", "#4ea2d9", "#4292c6", "#2171b5", "#08519c", "#08306b",];
 
 
 // Callback function
@@ -116,7 +116,7 @@ function ready(error, data) {
         .attr("transform", function(d, i) { return "translate(" + i * 31 + ",0)"; });
 
     legenditem.append("rect")
-        .attr("x", width - 240)
+        .attr("x", width - 550)
         .attr("y", 30)
         .attr("width", 30)
         .attr("height", 6)
@@ -124,7 +124,7 @@ function ready(error, data) {
         .style("fill", function(d, i) { return legendColors[i]; });
 
     legenditem.append("text")
-        .attr("x", width - 240)
+        .attr("x", width - 550)
         .attr("y", 20)
         .style("text-anchor", "middle")
         .text(function(d, i) { return legendText[i]; });
