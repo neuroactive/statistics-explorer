@@ -1,6 +1,6 @@
-let current_year;
-let current_place_name;
-let current_place_population;
+var current_year;
+var current_place_name;
+var current_place_population;
 
 
 // Initialize Vue app
