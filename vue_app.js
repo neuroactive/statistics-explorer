@@ -1,8 +1,12 @@
+let current_place_name;
+
+
 // Initialize Vue app
 const vue_app = new Vue({
     el: '#content',
     data: {
         // model
+        current_place_name
     },
     computed: {
         // active_tab: () => current_state.active_tab
