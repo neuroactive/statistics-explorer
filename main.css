@@ -15,7 +15,7 @@ h1 {
     font-size: 3.2rem !important;
 }
 
-p, nav-link {
+p, .nav-link {
     font-size: 1.6rem;
 }
 
