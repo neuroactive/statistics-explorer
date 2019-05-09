@@ -32,30 +32,31 @@ svg.append("rect")
 
 var g = svg.append("g");
 
-// Asynchronous tasks. Load topojson maps and data.
-d3.queue()
-    // .defer(d3.json, "data/json/estonia.json")
-    .defer(d3.json, "data/json/counties.json")
-    // .defer(d3.json, "data/json/municipalities.json")
-    // .defer(d3.json, "data/json/settlements.json")
-    .defer(d3.csv, "data/population.csv", function(d) {
-        if (isNaN(d.population)) {
-            population_data.set(d.id, 0);
-        } else {
-            population_data.set(d.id, +d.population);
-        }
-    })
-    .await(ready);
 
 
-var legendText = ["0", "1000", "5000", "10000", "20000", "50000", "100000", "500000"];
-var legendColors = ["#9ecae1", "#63afd7", "#4ea2d9", "#4292c6", "#2171b5", "#08519c", "#1f4884","08306b"];
 
 
-// Callback function
-function ready(error, data) {
-    if (error) throw error;
 
+function drawCounties(){
+    // Asynchronous tasks. Load topojson maps and data.
+    d3.queue()
+        .defer(d3.json, "data/json/counties.json")
+        // .defer(d3.json, "data/json/settlements.json")
+        .defer(d3.csv, "data/population.csv", function (d) {
+            if (isNaN(d.population)) {
+                population_data.set(d.id, 0);
+            } else {
+                population_data.set(d.id, +d.population);
+            }
+        })
+        .await(ready);
+
+    var legendText = ["0", "1000", "5000", "10000", "20000", "50000", "100000", "500000"];
+    var legendColors = ["#9ecae1", "#63afd7", "#4ea2d9", "#4292c6", "#2171b5", "#08519c", "#1f4884","08306b"];
+
+        function ready(error, data) {
+            if (error) throw error; 
+             
     // Debug
     console.log(data);
 
@@ -128,7 +129,117 @@ function ready(error, data) {
         .attr("y", 20)
         .style("text-anchor", "middle")
         .text(function(d, i) { return legendText[i]; });
+        }
+
+
 }
+
+function drawMunicipalities(){
+    d3.queue()
+        .defer(d3.json, "data/json/municipalities.json")
+        // .defer(d3.json, "data/json/settlements.json")
+        .defer(d3.csv, "data/population.csv", function (d) {
+            if (isNaN(d.population)) {
+                population_data.set(d.id, 0);
+            } else {
+                population_data.set(d.id, +d.population);
+            }
+        })
+        .await(ready);
+    var legendText = ["0", "1000", "5000", "10000", "20000", "50000", "100000", "500000"];
+    var legendColors = ["#9ecae1", "#63afd7", "#4ea2d9", "#4292c6", "#2171b5", "#08519c", "#1f4884","08306b"];
+
+
+    
+    // Callback function
+    function ready(error, data) {
+        if (error) throw error;
+        // Debug
+    console.log(data);
+
+    // Load population data
+    var municipalities = topojson.feature(data, {
+        type: "GeometryCollection",
+        //geometries: data.objects.maakond.geometries  // counties and Estonia
+        geometries: data.objects.omavalitsus.geometries // municipalities
+        // geometries: data.objects.asustusyksus.geometries // settlements
+    });
+
+    //Tooltip for the mouseover(hover)
+    var tooltip = d3.select('body').append('div')
+            .attr('class', 'hidden tooltip');
+
+    // Draw the map
+    g.append("g")
+        .attr("id", "municipalities")
+        .selectAll("path")
+        .data(municipalities.features)
+        .enter()
+        .append("path")
+        .attr("d", path)
+        // .attr("fill", "steelblue")
+        .attr("fill", function(d) {
+            // var value = population_data.get(d.properties.OKOOD);
+            // var value = population_data.get(d.properties.MKOOD);
+            // return (value != 0 ? population_colour(value) : "steelblue");
+            return population_colour(d.population = population_data.get(d.properties.MKOOD));
+        })
+        .on("click", clicked)
+        .on('mousemove', function(d) {
+            var mouse = d3.mouse(svg.node()).map(function(d) {
+                return parseInt(d);
+            });
+            tooltip.classed('hidden', false)
+                .attr('style', 'left:' + (mouse[0]) +
+                        'px; top:' + (mouse[1] + 30) + 'px')
+                .html(d.properties.MNIMI);
+        })
+        .on('mouseout', function() {
+            tooltip.classed('hidden', true);
+        });;
+
+    g.append("path")
+        .datum(topojson.mesh(data, data.objects.maakond, function(a, b) { return a !== b; }))
+        .attr("id", "county_borders")
+        .attr("d", path);
+
+    var legend = svg.append("g")
+        .attr("id", "legend");
+
+    var legenditem = legend.selectAll(".legenditem")
+        .data(d3.range(8))
+        .enter()
+        .append("g")
+        .attr("class", "legenditem")
+        .attr("transform", function(d, i) { return "translate(" + i * 31 + ",0)"; });
+
+    legenditem.append("rect")
+        .attr("x", width - 550)
+        .attr("y", 30)
+        .attr("width", 30)
+        .attr("height", 6)
+        .attr("class", "rect")
+        .style("fill", function(d, i) { return legendColors[i]; });
+
+    legenditem.append("text")
+        .attr("x", width - 550)
+        .attr("y", 20)
+        .style("text-anchor", "middle")
+        .text(function(d, i) { return legendText[i]; });
+
+    
+}
+
+}
+
+
+if(zoomLevel === 'municipality'){
+    drawMunicipalities();
+}
+else if (zoomLevel === 'county'){
+    drawCounties();
+}
+
 
 
 function clicked(d) {
