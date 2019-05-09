@@ -1,13 +1,13 @@
 // Set dimensions
-var width = 800,
-    height = 600,
+var width = 600,
+    height = 500,
     active = d3.select(null);
 
 // Projection
 var projection = d3.geoMercator()
     // .fitExtent([ [0, 0], [800, 600] ], counties);
     .center([25.0136, 58.5953])
-    .scale([6800])
+    .scale([5000])
     .translate([width / 2, height / 2]);
 
 // Path
@@ -93,7 +93,7 @@ function ready(error, data) {
             });
             tooltip.classed('hidden', false)
                 .attr('style', 'left:' + (mouse[0]) +
-                        'px; top:' + (mouse[1]+ 50) + 'px')
+                        'px; top:' + (mouse[1] + 30) + 'px')
                 .html(d.properties.MNIMI);
         })
         .on('mouseout', function() {
@@ -136,7 +136,9 @@ function clicked(d) {
     console.log("Map was clicked.");
     if (typeof d !== 'undefined') {
         console.log(d.properties.MNIMI);
-    }
+        vue_app.current_place_name = d.properties.MNIMI;
+        vue_app.current_place_population = d.population;
+    };
 
     if (active.node() === this) return reset();
     active.classed("active", false);
@@ -189,5 +191,9 @@ function reset() {
         .duration(500)
         .style("stroke-width", "1.5px")
         .attr("transform", "");
+
+    // Reset data values to country level
+    vue_app.current_place_name = 'Estonia';
+    vue_app.current_place_population = 1300000;
 }
 
