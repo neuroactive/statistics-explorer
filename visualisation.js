@@ -49,7 +49,7 @@ d3.queue()
 
 
 var legendText = ["0", "1000", "5000", "10000", "20000", "50000", "100000", "500000"];
-var legendColors = ["#9ecae1", "#63afd7", "#4ea2d9", "#4292c6", "#2171b5", "#08519c", "#08306b",];
+var legendColors = ["#9ecae1", "#63afd7", "#4ea2d9", "#4292c6", "#2171b5", "#08519c", "#1f4884","08306b"];
 
 
 // Callback function
