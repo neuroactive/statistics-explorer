@@ -159,6 +159,27 @@ function clicked(d) {
         // console.log("x: " + x + ", y:" + y + " , k: " + k);
 }
 
+function update(year){
+    slider.property("value", year);
+    d3.select(".year").text(year);
+    countyShapes.style("fill", function(d) {
+        return color(d.properties.years[year][0].rate)
+    });
+}
+
+var slider = d3.select(".slider")
+    .append("input")
+    .attr("type", "range")
+    .attr("min", 1996)
+    .attr("max", 2012)
+    .attr("step", 1)
+    .on("input", function() {
+        var year = this.value;
+        update(year);
+    });
+
+update(1996);
+
 
 function reset() {
     active.classed("active", false);
