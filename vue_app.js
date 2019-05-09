@@ -1,16 +1,15 @@
-var current_year;
-var current_place_name;
-var current_place_population;
+var current_year = 2017;
+var current_place_name = 'Estonia';
+var current_place_population = '1300000';
 
 
 // Initialize Vue app
 const vue_app = new Vue({
     el: '#content',
     data: {
-        // model
-        current_year: 2017,
-        current_place_name: 'Estonia',
-        current_place_population: 1300000
+        current_year: current_year,
+        current_place_name: current_place_name,
+        current_place_population: current_place_population
     }
     // },
     // computed: {
