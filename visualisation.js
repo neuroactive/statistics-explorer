@@ -299,6 +299,6 @@ function reset() {
 
     // Reset data values to country level
     vue_app.current_place_name = 'Estonia';
-    vue_app.current_place_population = 1300000;
+    vue_app.current_place_population = parseInt('1300000').toLocaleString();
 }
 
