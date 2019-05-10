@@ -51,8 +51,8 @@ function drawCounties(){
         })
         .await(ready);
 
-    var legendText = ["5,000", "20,000", "50,000", "125,000", "500,000"];
-    var legendColors = ["#9ecae1", "#63afd7", "#2171b5", "#08519c", "#08306b"];
+    var legendText = ["0", "5,000", "20,000", "50,000", "125,000", "500,000"];
+    var legendColors = ["#C6DBEF","#9ecae1", "#63afd7", "#2171b5", "#08519c", "#08306b"];
 
     function ready(error, data) {
         if (error) throw error; 
@@ -111,11 +111,11 @@ function drawCounties(){
         .attr("id", "legend");
 
     var legenditem = legend.selectAll(".legenditem")
-        .data(d3.range(5))
+        .data(d3.range(6))
         .enter()
         .append("g")
         .attr("class", "legenditem")
-        .attr("transform", function(d, i) { return "translate(" + i * 50 + ",0)"; });
+        .attr("transform", function(d, i) { return "translate(" + i * 42 + ",0)"; });
 
     legenditem.append("rect")
         .attr("x", width - 600)
