@@ -96,7 +96,7 @@ path {
     font-size: 1.2rem;
 }
 
-/*svg.population_by_county {
+svg.population_by_county {
     position: relative;
-    top: 0px;
-}*/
+    top: -10px;
+}
