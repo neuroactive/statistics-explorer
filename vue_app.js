@@ -27,7 +27,9 @@ const vue_app = new Vue({
         zoomLevel: zoomLevel
     },
     methods: {
-
+        updatePopulation(){
+            updatePopulationByYear(this.current_year);
+        },
         changeMap() {
             console.log(this.zoomLevel)
             var elements = document.getElementsByTagName('g');
