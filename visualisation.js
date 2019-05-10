@@ -42,11 +42,14 @@ function drawCounties(){
     d3.queue()
         .defer(d3.json, "data/json/counties.json")
         // .defer(d3.json, "data/json/settlements.json")
-        .defer(d3.csv, "data/population.csv", function (d) {
-            if (isNaN(d.population)) {
+        .defer(d3.csv, "data/population_by_county.csv", function (d) {
+            if (isNaN(d['pop_' + current_year])) {
                 population_data.set(d.id, 0);
             } else {
-                population_data.set(d.id, +d.population);
+                // population_data.set(d.id, +d.population);
+                console.log('current_year: ' + current_year);
+                console.log('pop_year: ' + d['pop_' + current_year]);
+                population_data.set(d.id, +d['pop_' + current_year]);
             }
         })
         .await(ready);
