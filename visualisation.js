@@ -51,8 +51,8 @@ function drawCounties(){
         })
         .await(ready);
 
-    var legendText = ["0", "10000", "50000", "100000", "150000", "500000",];
-    var legendColors = ["#9ecae1", "#63afd7", "#2171b5", "#08519c", "#08306b" ];
+    var legendText = ["0", "10000", "50000", "100000", "150000", "500000"];
+    var legendColors = ["#9ecae1", "#63afd7", "#2171b5", "#08519c", "#08306b"];
 
         function ready(error, data) {
             if (error) throw error; 
@@ -111,24 +111,24 @@ function drawCounties(){
         .attr("id", "legend");
 
     var legenditem = legend.selectAll(".legenditem")
-        .data(d3.range(8))
+        .data(d3.range(5))
         .enter()
         .append("g")
         .attr("class", "legenditem")
-        .attr("transform", function(d, i) { return "translate(" + i * 31 + ",0)"; });
+        .attr("transform", function(d, i) { return "translate(" + i * 50 + ",0)"; });
 
     legenditem.append("rect")
-        .attr("x", width - 550)
-        .attr("y", 30)
-        .attr("width", 30)
-        .attr("height", 6)
+        .attr("x", width - 600)
+        .attr("y", 0)
+        .attr("width", 120)
+        .attr("height", 10)
         .attr("class", "rect")
         .style("fill", function(d, i) { return legendColors[i]; });
 
     legenditem.append("text")
-        .attr("x", width - 550)
+        .attr("x", width - 600)
         .attr("y", 20)
-        .style("text-anchor", "middle")
+        .style("text-anchor", "left")
         .text(function(d, i) { return legendText[i]; });
         }
 
