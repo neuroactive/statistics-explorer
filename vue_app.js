@@ -1,6 +1,6 @@
 var current_year = 2018;
 var current_place_name = 'Estonia';
-var current_place_population = 1300000;
+var current_place_population = 1317762;
 var zoomLevel = 'county';
 
 var exampleData = [
