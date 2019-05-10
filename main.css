@@ -106,3 +106,6 @@ path {
 .bar.left {
     fill: #4682b4 !important;
 }
+.bar.right {
+    fill: #ff69b4 !important;
+}
