@@ -68,3 +68,11 @@ div.tooltip {
 .tab-content {
     padding-top: 25px;
 }
+
+.topnav-centered h1 {
+    float: none;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
