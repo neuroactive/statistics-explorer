@@ -23,7 +23,7 @@ const vue_app = new Vue({
 
             changeMap() {
                 console.log(this.zoomLevel)
-                var elements = document.getElementsByTagName('g');
+                var elements = document.getElementsByTagName('path');
                 while (elements[0]) elements[0].parentNode.removeChild(elements[0]);
                 if (this.zoomLevel === "country") {
                     drawCounties();
