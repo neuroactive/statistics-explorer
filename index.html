@@ -18,17 +18,17 @@
 
 <nav class="navbar navbar-light">
     <a class="navbar-brand pl-3" href="#">
-        <img src="img/nai_trans.png" height="50" alt="Neuroactive AI">
+        <img src="img/nai_trans.png" height="50" alt="Neuroactive AI" style="padding-left: 30px">
     </a>
     <div class="topnav-centered">
-        <h1 class="text-dark">Estonia Population Statistics</h1>
+        <h1 class="text-dark">Estonian Statistics Explorer</h1>
     </div>
 </nav>
 
 <div class="container-fluid mt-4" id="content">
 
     <!-- Nav tabs -->
-    <ul class="nav nav-tabs">
+    <ul class="nav nav-tabs" style="padding-left: 30px">
         <li class="nav-item">
             <a class="nav-link active" data-toggle="tab" href="#home">Population</a>
         </li>
@@ -46,7 +46,7 @@
             <div class="row container-fluid">
                 <!--MAP-->
                 <!-- <div style="width:600px; box-shadow: 1px 1px 5px 0px #9c9c9c;"> -->
-                <div style="width:600px;">
+                <div style="width:600px; padding-left: 30px">
                     <!--Details-->
                     <div style="width: 250px; float: left">
                         <p style="font-size: 1.4rem"><b>Level of detail</b></p>
@@ -65,8 +65,8 @@
                         <div class="slider">
                             <input type="range" min="2012" max="2018" step="1" v-model="current_year" style="width: 250px">
                         </div>
-                        <div>
-                            <svg id="legend">
+                        <div style="height: 40px !important">
+                            <svg id="legend" style="height: 40px !important">
                                 
                             </svg>
                         </div>
@@ -74,7 +74,7 @@
                     <svg class="population_by_county" width="600" height="500"></svg>
                 </div>
                 <!--Charts, details, etc-->
-                <div class="col-6">
+                <div class="col-6" style="padding-left: 50px">
                     <h1>{{ current_place_name }}</h1>
 
                     <p><b>Population ({{ current_year }}):</b><br>

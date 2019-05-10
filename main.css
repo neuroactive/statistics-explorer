@@ -6,6 +6,8 @@ body {
     width: 100%;
     font-family: "Segoe UI", "Helvetica Neue", Helvetica, Verdana, sans-serif !important;
     color: #444 !important;
+    padding: 0 !important;
+    margin: 0 !important;
 }
 
 h1 {
@@ -76,4 +78,9 @@ path {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+}
+
+.btn {
+    margin-bottom: 0px;
+    padding-left: 10px;
 }
