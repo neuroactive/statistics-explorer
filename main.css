@@ -101,7 +101,7 @@ path {
     top: -10px;
 }*/
 .bar {
-    fill-opacity: 0.9;
+    fill-opacity: 0.9 !important;
 }
 .bar.left {
     fill: #4682b4 !important;
