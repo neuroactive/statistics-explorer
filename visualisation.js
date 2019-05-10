@@ -14,29 +14,30 @@ var projection = d3.geoMercator()
 var path = d3.geoPath()
     .projection(projection);
 
-// Colour
-var population_domain = [0, 1000, 5000, 10000, 20000, 50000, 100000, 500000];
-var population_colour = d3.scaleThreshold()
-    .domain(population_domain)
-    .range(d3.schemeBlues[9]);
 
-// Population data
-var population_data = d3.map();
-
-var svg = d3.select("svg.population_by_county");
-
-svg.append("rect")
-    .attr("width", width)
-    .attr("height", height)
-    .on("click", clicked);
-
-
-
-var g = svg.append("g");
 
 
 
 function drawCounties(){
+    // Colour
+    var population_domain = [0, 1000, 5000, 10000, 20000, 50000, 100000, 500000];
+    var population_colour = d3.scaleThreshold()
+        .domain(population_domain)
+        .range(d3.schemeBlues[9]);
+
+    // Population data
+    var population_data = d3.map();
+
+    var svg = d3.select("svg.population_by_county");
+
+    svg.append("rect")
+        .attr("width", width)
+        .attr("height", height)
+        .on("click", clicked);
+
+
+
+    var g = svg.append("g");
     // Asynchronous tasks. Load topojson maps and data.
     d3.queue()
         .defer(d3.json, "data/json/counties.json")
@@ -134,6 +135,25 @@ function drawCounties(){
 }
 
 function drawMunicipalities(){
+    // Colour
+    var population_domain = [0, 1000, 5000, 10000, 20000, 50000, 100000, 500000];
+    var population_colour = d3.scaleThreshold()
+        .domain(population_domain)
+        .range(d3.schemeBlues[9]);
+
+    // Population data
+    var population_data = d3.map();
+
+    var svg = d3.select("svg.population_by_county");
+
+    svg.append("rect")
+        .attr("width", width)
+        .attr("height", height)
+        .on("click", clicked);
+
+
+
+    var g = svg.append("g");
     d3.queue()
         .defer(d3.json, "data/json/municipalities.json")
         // .defer(d3.json, "data/json/settlements.json")

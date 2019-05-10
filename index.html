@@ -40,13 +40,13 @@
                     <!--Details-->
                     <div class="btn-group">
                         <label class="btn">
-                          <input type="radio" name="options"   value="country" v-model="zoomLevel" > Country
+                          <input type="radio" name="options" @change="changeMap()" v-model="zoomLevel" value="country"> Country
                         </label>
                         <label class="btn">
-                          <input type="radio" name="options" onclick="changeMap('county')" value="county" v-model="zoomLevel"> County
+                          <input type="radio" name="options" @change="changeMap()" v-model="zoomLevel" value="county"> County
                         </label>
                         <label class="btn">
-                          <input type="radio" name="options"  onclick="changeMap('county')" value="municipality" v-model="zoomLevel"> Municipality
+                          <input type="radio" name="options"  @change="changeMap()" v-model="zoomLevel" value="municipality"> Municipality
                         </label>
                     </div>
                     <h2 class="year" style="padding-left: 50px"></h2>

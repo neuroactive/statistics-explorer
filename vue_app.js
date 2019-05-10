@@ -21,6 +21,24 @@ const vue_app = new Vue({
         exampleData: exampleData,
         zoomLevel: zoomLevel
     },
+    methods: {
+      
+      changeMap(){
+        console.log(this.zoomLevel)
+        var elements = document.getElementsByTagName('g');
+        while (elements[0]) elements[0].parentNode.removeChild(elements[0]);
+        if(this.zoomLevel === "country"){
+            drawCounties();
+        }
+        if(this.zoomLevel === "county"){
+            drawCounties();
+        }
+        if(this.zoomLevel === "municipality"){
+            drawMunicipalities();
+        }
+      
+      }
+    },
     mounted: function () {
              this.$nextTick(function () {
                  // Code that will run only after the entire view has been rendered (see: https://vuejs.org/v2/api/#mounted)
