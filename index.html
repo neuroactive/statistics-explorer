@@ -43,11 +43,11 @@
     <!-- Tab panes -->
     <div class="tab-content">
         <div id="home" class="tab-pane active"><br>
-            <div class="row">
+            <div class="row container-fluid">
                 <!--MAP-->
-                <div style="width:600px;">
+                <div style="width:600px; box-shadow: 1px 1px 5px 0px #9c9c9c;">
                     <!--Details-->
-                    <div class="btn-group" style=" padding-left: 40px;margin-bottom: 10px;">
+                    <div class="btn-group" style=" padding-left: 40px;margin-bottom: 10px; margin-top: 30px">
                         <label class="btn">
                           <input type="radio" name="options" @change="changeMap()" v-model="zoomLevel" value="country"> Country
                         </label>
