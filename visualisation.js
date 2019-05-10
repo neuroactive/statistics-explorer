@@ -51,8 +51,8 @@ function drawCounties(){
         })
         .await(ready);
 
-    var legendText = ["0", "1000", "5000", "10000", "20000", "50000", "100000", "500000"];
-    var legendColors = ["#9ecae1", "#63afd7", "#4ea2d9", "#4292c6", "#2171b5", "#08519c", "#1f4884","08306b"];
+    var legendText = ["0", "10000", "50000", "100000", "150000", "500000",];
+    var legendColors = ["#9ecae1", "#63afd7", "#2171b5", "#08519c", "#08306b" ];
 
         function ready(error, data) {
             if (error) throw error; 
@@ -259,7 +259,7 @@ function clicked(d) {
     if (typeof d !== 'undefined') {
         console.log(d.properties.MNIMI);
         vue_app.current_place_name = d.properties.MNIMI;
-        vue_app.current_place_population = d.population;
+        vue_app.current_place_population = parseInt(d.population,10).toLocaleString();
     };
 
     if (active.node() === this) return reset();
@@ -283,26 +283,29 @@ function clicked(d) {
         // console.log("x: " + x + ", y:" + y + " , k: " + k);
 }
 
-function update(year){
-    slider.property("value", year);
-    d3.select(".year").text(year);
-    countyShapes.style("fill", function(d) {
-        return color(d.properties.years[year][0].rate)
-    });
-}
+// function update(year){
+//     let slider = d3.select(".slider");
+//     slider.property("value", year);
+//     d3.select(".year").text(year);
+//     // countyShapes.style("fill", function(d) {
+//     //     return color(d.properties.years[year][0].rate)
+//     // });
+//     // current_year = year;
+// }
 
-var slider = d3.select(".slider")
-    .append("input")
-    .attr("type", "range")
-    .attr("min", 1996)
-    .attr("max", 2012)
-    .attr("step", 1)
-    .on("input", function() {
-        var year = this.value;
-        update(year);
-    });
+// var slider = d3.select(".slider")
+//     .append("input")
+//     .attr("type", "range")
+//     .attr("min", 1996)
+//     .attr("max", 2018)
+//     .attr("value", current_year)
+//     .attr("step", 1)
+//     .on("input", function() {
+//         var year = this.value;
+//         update(year);
+//     });
 
-update(1996);
+// update(1996);
 
 
 function reset() {
@@ -316,6 +319,6 @@ function reset() {
 
     // Reset data values to country level
     vue_app.current_place_name = 'Estonia';
-    vue_app.current_place_population = 1300000;
+    vue_app.current_place_population = parseInt('1300000').toLocaleString();
 }
 
