@@ -131,6 +131,50 @@ function drawCounties(){
         .text(function(d, i) { return legendText[i]; });
         }
 
+        function clicked(d) {
+            // Debug
+            console.log("Map was clicked.");
+            if (typeof d !== 'undefined') {
+                console.log(d.properties.MNIMI);
+                vue_app.current_place_name = d.properties.MNIMI;
+                vue_app.current_place_population = parseInt(d.population,10).toLocaleString();
+            };
+        
+            if (active.node() === this) return reset();
+            active.classed("active", false);
+            active = d3.select(this).classed("active", true);
+        
+            var bounds = path.bounds(d),
+                dx = bounds[1][0] - bounds[0][0],
+                dy = bounds[1][1] - bounds[0][1],
+                x = (bounds[0][0] + bounds[1][0]) / 2,
+                y = (bounds[0][1] + bounds[1][1]) / 2,
+                scale = .9 / Math.max(dx / width, dy / height),
+                translate = [width / 2 - scale * x, height / 2 - scale * y];
+        
+            g.transition()
+                .duration(750)
+                .style("stroke-width", 1.5 / scale + "px")
+                .attr("transform", "translate(" + translate + ")scale(" + scale + ")");
+        
+                // // Debug
+                // console.log("x: " + x + ", y:" + y + " , k: " + k);
+        }
+
+        function reset() {
+            active.classed("active", false);
+            active = d3.select(null);
+        
+            g.transition()
+                .duration(500)
+                .style("stroke-width", "1.5px")
+                .attr("transform", "");
+        
+            // Reset data values to country level
+            vue_app.current_place_name = 'Estonia';
+            vue_app.current_place_population = parseInt('1300000').toLocaleString();
+        }
+
 
 }
 
@@ -249,16 +293,12 @@ function drawMunicipalities(){
     
 }
 
-}
-
-drawCounties();
-
 function clicked(d) {
     // Debug
     console.log("Map was clicked.");
     if (typeof d !== 'undefined') {
         console.log(d.properties.MNIMI);
-        vue_app.current_place_name = d.properties.MNIMI;
+        vue_app.current_place_name = d.properties.ONIMI;
         vue_app.current_place_population = parseInt(d.population,10).toLocaleString();
     };
 
@@ -282,6 +322,26 @@ function clicked(d) {
         // // Debug
         // console.log("x: " + x + ", y:" + y + " , k: " + k);
 }
+
+function reset() {
+    active.classed("active", false);
+    active = d3.select(null);
+
+    g.transition()
+        .duration(500)
+        .style("stroke-width", "1.5px")
+        .attr("transform", "");
+
+    // Reset data values to country level
+    vue_app.current_place_name = 'Estonia';
+    vue_app.current_place_population = parseInt('1300000').toLocaleString();
+}
+
+}
+
+drawCounties();
+
+
 
 // function update(year){
 //     let slider = d3.select(".slider");
@@ -308,17 +368,5 @@ function clicked(d) {
 // update(1996);
 
 
-function reset() {
-    active.classed("active", false);
-    active = d3.select(null);
 
-    g.transition()
-        .duration(500)
-        .style("stroke-width", "1.5px")
-        .attr("transform", "");
-
-    // Reset data values to country level
-    vue_app.current_place_name = 'Estonia';
-    vue_app.current_place_population = parseInt('1300000').toLocaleString();
-}
 
