@@ -50,13 +50,13 @@
                     <div class="btn-group" style=" padding-left: 40px;margin-bottom: 10px; margin-top: 30px">
                         <label class="btn">
                           <input type="radio" name="options" @change="changeMap()" v-model="zoomLevel" value="country"> Country
-                        </label>
+                        </label><br>
                         <label class="btn">
                           <input type="radio" name="options" @change="changeMap()" v-model="zoomLevel" value="county"> County
-                        </label>
+                        </label><br>
                         <label class="btn">
                           <input type="radio" name="options"  @change="changeMap()" v-model="zoomLevel" value="municipality"> Municipality
-                        </label>
+                        </label><br>
                     </div>
                     <div>
                         <h2 class="year" style="padding-left: 50px">{{ current_year }}</h2>

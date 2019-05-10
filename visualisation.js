@@ -46,9 +46,6 @@ function drawCounties(){
             if (isNaN(d['pop_' + current_year])) {
                 population_data.set(d.id, 0);
             } else {
-                // population_data.set(d.id, +d.population);
-                console.log('current_year: ' + current_year);
-                console.log('pop_year: ' + d['pop_' + current_year]);
                 population_data.set(d.id, +d['pop_' + current_year]);
             }
         })
