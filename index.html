@@ -38,20 +38,23 @@
                 <!--MAP-->
                 <div style="width:600px;">
                     <!--Details-->
-                    <div class="btn-group">
-                        <label class="btn">
+                    <div class="zoom_options" style="width: 200px; float: left">
+                        <p><b>Level of detail</b></p>
+                        <label>
                           <input type="radio" name="options"   value="country" v-model="zoomLevel" > Country
-                        </label>
-                        <label class="btn">
+                        </label><br>
+                        <label>
                           <input type="radio" name="options" onclick="changeMap('county')" value="county" v-model="zoomLevel"> County
-                        </label>
-                        <label class="btn">
+                        </label><br>
+                        <label>
                           <input type="radio" name="options"  onclick="changeMap('county')" value="municipality" v-model="zoomLevel"> Municipality
                         </label>
                     </div>
-                    <h2 class="year" style="padding-left: 50px">{{ current_year }}</h2>
-                    <div class="slider" style="padding-left: 50px">
-                        <input type="range" min="2012" max="2018" step="1" v-model="current_year" style="width: 250px">
+                    <div>
+                        <h2 class="year" style="padding-left: 50px">{{ current_year }}</h2>
+                        <div class="slider" style="padding-left: 50px">
+                            <input type="range" min="2012" max="2018" step="1" v-model="current_year" style="width: 250px">
+                        </div>
                     </div>
                     <svg class="population_by_county" width="600" height="500"></svg>
                 </div>
