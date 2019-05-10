@@ -51,7 +51,7 @@ function drawCounties(){
         })
         .await(ready);
 
-    var legendText = ["0", "10000", "50000", "100000", "150000", "500000"];
+    var legendText = ["5.000", "50.000", "100.000", "150.000", "500.000"];
     var legendColors = ["#9ecae1", "#63afd7", "#2171b5", "#08519c", "#08306b"];
 
     function ready(error, data) {
@@ -128,7 +128,7 @@ function drawCounties(){
     legenditem.append("text")
         .attr("x", width - 600)
         .attr("y", 20)
-        .style("text-anchor", "left")
+        .style("text-anchor", "right")
         .text(function(d, i) { return legendText[i]; });
         }
 
