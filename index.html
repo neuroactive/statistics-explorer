@@ -38,16 +38,15 @@
                 <!--MAP-->
                 <div style="width:600px;">
                     <!--Details-->
-                    <div class="zoom_options" style="width: 200px; float: left">
-                        <p><b>Level of detail</b></p>
-                        <label>
-                          <input type="radio" name="options"   value="country" v-model="zoomLevel" > Country
-                        </label><br>
-                        <label>
-                          <input type="radio" name="options" onclick="changeMap('county')" value="county" v-model="zoomLevel"> County
-                        </label><br>
-                        <label>
-                          <input type="radio" name="options"  onclick="changeMap('county')" value="municipality" v-model="zoomLevel"> Municipality
+                    <div class="btn-group">
+                        <label class="btn">
+                          <input type="radio" name="options" @change="changeMap()" v-model="zoomLevel" value="country"> Country
+                        </label>
+                        <label class="btn">
+                          <input type="radio" name="options" @change="changeMap()" v-model="zoomLevel" value="county"> County
+                        </label>
+                        <label class="btn">
+                          <input type="radio" name="options"  @change="changeMap()" v-model="zoomLevel" value="municipality"> Municipality
                         </label>
                     </div>
                     <div>
