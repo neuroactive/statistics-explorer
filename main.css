@@ -84,3 +84,8 @@ path {
     margin-bottom: 0px;
     padding-left: 10px;
 }
+
+svg.population_by_county {
+    position: relative;
+    top: -30px;
+}
