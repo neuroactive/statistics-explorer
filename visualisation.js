@@ -32,8 +32,7 @@ svg.append("rect")
 
 
 
-
-
+var g = svg.append("g");
 
 
 
@@ -233,20 +232,6 @@ function drawMunicipalities(){
 }
 
 drawCounties();
-function changeMap(zoomLevel){
-    if(zoomLevel === 'municipality'){
-        d3.select("svg").remove();
-        drawMunicipalities();
-    }
-    else if (zoomLevel === 'county'){
-        d3.select("svg").remove();
-        drawCounties();
-    }
-}
-
-
-
-
 
 function clicked(d) {
     // Debug
