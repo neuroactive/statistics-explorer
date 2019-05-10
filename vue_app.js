@@ -12,9 +12,14 @@ const vue_app = new Vue({
             current_year: current_year,
             current_place_name: current_place_name,
             current_place_population: current_place_population.toLocaleString(),
-            zoomLevel: zoomLevel,
+            zoomLevel: zoomLevel
         },
         methods: {
+
+
+            updatePopulation() {
+                updatePopulationByYear(this.current_year);
+            },
 
             changeMap() {
                 console.log(this.zoomLevel)

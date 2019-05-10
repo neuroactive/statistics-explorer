@@ -51,11 +51,11 @@ function drawCounties(){
         })
         .await(ready);
 
-    var legendText = ["0", "","","","10000", "50000", "100000", "150000", "500000",];
-    var legendColors = ["#bbd5e3","#9ecae1", "#63afd7","#43a9df", "#2171b5", "#08519c", "#022456" ];
+    var legendText = ["0", "10000", "50000", "100000", "150000", "500000"];
+    var legendColors = ["#9ecae1", "#63afd7", "#2171b5", "#08519c", "#08306b"];
 
-        function ready(error, data) {
-            if (error) throw error; 
+    function ready(error, data) {
+        if (error) throw error; 
              
     // Debug
     console.log(data);
@@ -111,24 +111,24 @@ function drawCounties(){
         .attr("id", "legend");
 
     var legenditem = legend.selectAll(".legenditem")
-        .data(d3.range(8))
+        .data(d3.range(5))
         .enter()
         .append("g")
         .attr("class", "legenditem")
-        .attr("transform", function(d, i) { return "translate(" + i * 31 + ",0)"; });
+        .attr("transform", function(d, i) { return "translate(" + i * 50 + ",0)"; });
 
     legenditem.append("rect")
-        .attr("x", width - 550)
-        .attr("y", 30)
-        .attr("width", 30)
-        .attr("height", 6)
+        .attr("x", width - 600)
+        .attr("y", 0)
+        .attr("width", 120)
+        .attr("height", 10)
         .attr("class", "rect")
         .style("fill", function(d, i) { return legendColors[i]; });
 
     legenditem.append("text")
-        .attr("x", width - 550)
+        .attr("x", width - 600)
         .attr("y", 20)
-        .style("text-anchor", "middle")
+        .style("text-anchor", "left")
         .text(function(d, i) { return legendText[i]; });
         }
 
@@ -179,6 +179,23 @@ function drawCounties(){
 
 }
 
+function updatePopulationByYear(current_year){
+    d3.queue()
+    .defer(d3.csv, "data/population_by_country.csv", function (d) {
+        console.log("old one: "+current_place_population)
+        population_data = {}
+        population_data.current_year = current_year;
+        population_data.population = parseInt(d['pop_' + current_year]).toLocaleString();
+    })
+    .await(updatePopulationByYearCallBack);
+
+}
+
+function updatePopulationByYearCallBack(err,data){
+    vue_app.current_place_population = population_data['population'];
+    console.log("aaa " + current_place_population)
+}
+
 function drawMunicipalities(){
     // Colour
     var population_domain = [0, 1000, 5000, 10000, 20000, 50000, 100000, 500000];
@@ -202,11 +219,12 @@ function drawMunicipalities(){
     d3.queue()
         .defer(d3.json, "data/json/municipalities.json")
         // .defer(d3.json, "data/json/settlements.json")
-        .defer(d3.csv, "data/population.csv", function (d) {
-            if (isNaN(d.population)) {
+        .defer(d3.csv, "data/population_by_municipality.csv", function (d) {
+            if (isNaN(d['pop_2018'])) {
                 population_data.set(d.id, 0);
             } else {
-                population_data.set(d.id, +d.population);
+                population_data.set(d.id, +d['pop_2018']);
+                
             }
         })
         .await(ready);
@@ -246,7 +264,7 @@ function drawMunicipalities(){
             // var value = population_data.get(d.properties.OKOOD);
             // var value = population_data.get(d.properties.MKOOD);
             // return (value != 0 ? population_colour(value) : "steelblue");
-            return population_colour(d.population = population_data.get(d.properties.MKOOD));
+            return population_colour(d.population = population_data.get(d.properties.OKOOD));
         })
         .on("click", clicked)
         .on('mousemove', function(d) {
@@ -264,7 +282,7 @@ function drawMunicipalities(){
 
     g.append("path")
         .datum(topojson.mesh(data, data.objects.maakond, function(a, b) { return a !== b; }))
-        .attr("id", "county_borders")
+        .attr("id", "municipality_borders")
         .attr("d", path);
 
     // var legend = svg.append("g")
