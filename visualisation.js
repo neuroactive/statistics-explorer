@@ -51,8 +51,8 @@ function drawCounties(){
         })
         .await(ready);
 
-    var legendText = ["0", "10000", "50000", "100000", "150000", "500000",];
-    var legendColors = ["#9ecae1", "#63afd7", "#2171b5", "#08519c", "#08306b" ];
+    var legendText = ["0", "","","","10000", "50000", "100000", "150000", "500000",];
+    var legendColors = ["#bbd5e3","#9ecae1", "#63afd7","#43a9df", "#2171b5", "#08519c", "#022456" ];
 
         function ready(error, data) {
             if (error) throw error; 

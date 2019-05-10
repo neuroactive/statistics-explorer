@@ -42,7 +42,9 @@ const vue_app = new Vue({
                 drawMunicipalities();
             }
 
-        }
+        },
+
+
     },
     mounted: function () {
         this.$nextTick(function () {
