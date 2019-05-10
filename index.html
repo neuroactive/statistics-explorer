@@ -38,15 +38,15 @@
                 <!--MAP-->
                 <div style="width:600px;">
                     <!--Details-->
-                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
-                        <label class="btn btn-secondary active">
-                          <input type="radio" name="options" id="option1" autocomplete="off"> Country
+                    <div class="btn-group">
+                        <label class="btn">
+                          <input type="radio" name="options"   value="country" v-model="zoomLevel" > Country
                         </label>
-                        <label class="btn btn-secondary">
-                          <input type="radio" name="options" value="county" v-model="zoomLevel" id="option2" autocomplete="off"> County
+                        <label class="btn">
+                          <input type="radio" name="options" onclick="changeMap('county')" value="county" v-model="zoomLevel"> County
                         </label>
-                        <label class="btn btn-secondary">
-                          <input type="radio" name="options" value="municipality" v-model="zoomLevel" id="option3" autocomplete="off"> Municipality
+                        <label class="btn">
+                          <input type="radio" name="options"  onclick="changeMap('county')" value="municipality" v-model="zoomLevel"> Municipality
                         </label>
                     </div>
                     <h2 class="year" style="padding-left: 50px"></h2>
