@@ -100,3 +100,9 @@ path {
     position: relative;
     top: -10px;
 }*/
+.bar {
+    fill-opacity: 0.9;
+}
+.bar.left {
+    fill: #4682b4 !important;
+}
