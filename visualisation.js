@@ -106,7 +106,8 @@ function drawCounties(){
         .attr("id", "county_borders")
         .attr("d", path);
 
-    var legend = svg.append("g")
+    // var legend = svg.append("g")
+    var legend = d3.select("svg#legend")
         .attr("id", "legend");
 
     var legenditem = legend.selectAll(".legenditem")
@@ -266,7 +267,8 @@ function drawMunicipalities(){
         .attr("id", "county_borders")
         .attr("d", path);
 
-    var legend = svg.append("g")
+    // var legend = svg.append("g")
+    var legend = d3.select("svg#legend")
         .attr("id", "legend");
 
     var legenditem = legend.selectAll(".legenditem")
