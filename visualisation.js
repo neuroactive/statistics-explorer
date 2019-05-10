@@ -173,7 +173,7 @@ function drawCounties(){
         
             // Reset data values to country level
             vue_app.current_place_name = 'Estonia';
-            vue_app.current_place_population = parseInt('1300000').toLocaleString();
+            vue_app.current_place_population = parseInt('1317762').toLocaleString();
         }
 
 
@@ -336,7 +336,7 @@ function reset() {
 
     // Reset data values to country level
     vue_app.current_place_name = 'Estonia';
-    vue_app.current_place_population = parseInt('1300000').toLocaleString();
+    vue_app.current_place_population = parseInt('1317762').toLocaleString();
 }
 
 }
