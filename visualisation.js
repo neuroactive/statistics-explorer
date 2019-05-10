@@ -51,7 +51,7 @@ function drawCounties(){
         })
         .await(ready);
 
-    var legendText = ["5.000", "20.000", "50.000", "125.000", "500.000"];
+    var legendText = ["5,000", "20,000", "50,000", "125,000", "500,000"];
     var legendColors = ["#9ecae1", "#63afd7", "#2171b5", "#08519c", "#08306b"];
 
     function ready(error, data) {
