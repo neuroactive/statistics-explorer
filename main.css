@@ -4,13 +4,13 @@ html {
 
 body {
     width: 100%;
-    font-family: Roboto, Verdana, Arial, sans-serif;
+    font-family: "Segoe UI", "Helvetica Neue", Helvetica, Verdana, sans-serif !important;
     color: #444 !important;
 }
 
 h1 {
     font-family: Ubuntu;
-    font-weight: 300;
+    font-weight: 400 !important;
     font-size: 3.2rem !important;
     margin-bottom: 1.6rem !important;
 }
