@@ -30,7 +30,7 @@ svg.append("rect")
     .attr("height", height)
     .on("click", clicked);
 
-var g = svg.append("g");
+
 
 
 
@@ -232,13 +232,19 @@ function drawMunicipalities(){
 
 }
 
+drawCounties();
+function changeMap(zoomLevel){
+    if(zoomLevel === 'municipality'){
+        d3.select("svg").remove();
+        drawMunicipalities();
+    }
+    else if (zoomLevel === 'county'){
+        d3.select("svg").remove();
+        drawCounties();
+    }
+}
 
-if(zoomLevel === 'municipality'){
-    drawMunicipalities();
-}
-else if (zoomLevel === 'county'){
-    drawCounties();
-}
+
 
 
 
