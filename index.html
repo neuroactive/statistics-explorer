@@ -48,7 +48,7 @@
                 <!-- <div style="width:600px; box-shadow: 1px 1px 5px 0px #9c9c9c;"> -->
                 <div style="width:600px; padding-left: 20px;">
                     <!--Details-->
-                    <div style="width: 250px; padding-left: 35px; float: left">
+                    <div style="width: 250px; padding-left: 35px; padding-bottom: 15px; float: left">
                         <p style="font-size: 1.4rem"><b>Level of detail</b></p>
                         <label class="btn">
                           <input type="radio" name="options" @change="changeMap()" v-model="zoomLevel" value="country"> Country
@@ -63,7 +63,7 @@
                     <div style="float: right; width: 250px;">
                         <h2 class="year">{{ current_year }}</h2>
                         <div class="slider">
-                            <input type="range" min="2012" max="2018" step="1" v-model="current_year" style="width: 250px; margin-bottom: 12px !important">
+                            <input type="range" min="2012" max="2018" step="1" @change="updatePopulation()" v-model="current_year" style="width: 250px">
                         </div>
                         <div style="height: 40px !important">
                             <svg id="legend" style="height: 40px !important">
