@@ -1,1 +1,1 @@
-# visualisation-hackathon
+# statistics-explorer
