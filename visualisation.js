@@ -15,10 +15,7 @@ var path = d3.geoPath()
     .projection(projection);
 
 
-
-
-
-function drawCounties(){
+function drawCounties() {
     // Colour
     var population_domain = [0, 1000, 5000, 10000, 20000, 50000, 100000, 500000];
     var population_colour = d3.scaleThreshold()
@@ -28,14 +25,12 @@ function drawCounties(){
     // Population data
     var population_data = d3.map();
 
-    var svg = d3.select("svg.population_by_county");
+    var svg = d3.select("svg.map_population");
 
     svg.append("rect")
         .attr("width", width)
         .attr("height", height)
         .on("click", clicked);
-
-
 
     var g = svg.append("g");
     // Asynchronous tasks. Load topojson maps and data.
@@ -68,9 +63,9 @@ function drawCounties(){
         // geometries: data.objects.asustusyksus.geometries // settlements
     });
 
-    //Tooltip for the mouseover(hover)
-    var tooltip = d3.select('body').append('div')
-            .attr('class', 'hidden tooltip');
+    // //Tooltip for the mouseover(hover)
+    // var tooltip = d3.select('body').append('div')
+    //         .attr('class', 'hidden tooltip');
 
     // Draw the map
     g.append("g")
@@ -87,19 +82,19 @@ function drawCounties(){
             // return (value != 0 ? population_colour(value) : "steelblue");
             return population_colour(d.population = population_data.get(d.properties.MKOOD));
         })
-        .on("click", clicked)
-        .on('mousemove', function(d) {
-            var mouse = d3.mouse(svg.node()).map(function(d) {
-                return parseInt(d);
-            });
-            tooltip.classed('hidden', false)
-                .attr('style', 'left:' + (mouse[0]) +
-                        'px; top:' + (mouse[1] + 30) + 'px')
-                .html(d.properties.MNIMI);
-        })
-        .on('mouseout', function() {
-            tooltip.classed('hidden', true);
-        });;
+        .on("click", clicked);
+        // .on('mousemove', function(d) {
+        //     var mouse = d3.mouse(svg.node()).map(function(d) {
+        //         return parseInt(d);
+        //     });
+        //     tooltip.classed('hidden', false)
+        //         .attr('style', 'left:' + (mouse[0]) +
+        //                 'px; top:' + (mouse[1] + 30) + 'px')
+        //         .html(d.properties.MNIMI);
+        // })
+        // .on('mouseout', function() {
+        //     tooltip.classed('hidden', true);
+        // });;
 
     g.append("path")
         .datum(topojson.mesh(data, data.objects.maakond, function(a, b) { return a !== b; }))
@@ -175,9 +170,8 @@ function drawCounties(){
             vue_app.current_place_name = 'Estonia';
             vue_app.current_place_population = parseInt('1317762').toLocaleString();
         }
-
-
 }
+
 
 function updatePopulationByYear(current_year){
     d3.queue()
@@ -191,10 +185,12 @@ function updatePopulationByYear(current_year){
 
 }
 
+
 function updatePopulationByYearCallBack(err,data){
     vue_app.current_place_population = population_data['population'];
     console.log("aaa " + current_place_population)
 }
+
 
 function drawMunicipalities(){
     // Colour
@@ -206,14 +202,12 @@ function drawMunicipalities(){
     // Population data
     var population_data = d3.map();
 
-    var svg = d3.select("svg.population_by_county");
+    var svg = d3.select("svg.map_population");
 
     svg.append("rect")
         .attr("width", width)
         .attr("height", height)
         .on("click", clicked);
-
-
 
     var g = svg.append("g");
     d3.queue()
@@ -231,8 +225,6 @@ function drawMunicipalities(){
     var legendText = ["0", "1000", "5000", "10000", "20000", "50000", "100000", "500000"];
     var legendColors = ["#9ecae1", "#63afd7", "#4ea2d9", "#4292c6", "#2171b5", "#08519c", "#1f4884","08306b"];
 
-
-    
     // Callback function
     function ready(error, data) {
         if (error) throw error;
@@ -247,9 +239,9 @@ function drawMunicipalities(){
         // geometries: data.objects.asustusyksus.geometries // settlements
     });
 
-    //Tooltip for the mouseover(hover)
-    var tooltip = d3.select('body').append('div')
-            .attr('class', 'hidden tooltip');
+    // //Tooltip for the mouseover(hover)
+    // var tooltip = d3.select('body').append('div')
+    //         .attr('class', 'hidden tooltip');
 
     // Draw the map
     g.append("g")
@@ -266,19 +258,19 @@ function drawMunicipalities(){
             // return (value != 0 ? population_colour(value) : "steelblue");
             return population_colour(d.population = population_data.get(d.properties.OKOOD));
         })
-        .on("click", clicked)
-        .on('mousemove', function(d) {
-            var mouse = d3.mouse(svg.node()).map(function(d) {
-                return parseInt(d);
-            });
-            tooltip.classed('hidden', false)
-                .attr('style', 'left:' + (mouse[0]) +
-                        'px; top:' + (mouse[1] + 30) + 'px')
-                .html(d.properties.MNIMI);
-        })
-        .on('mouseout', function() {
-            tooltip.classed('hidden', true);
-        });;
+        .on("click", clicked);
+        // .on('mousemove', function(d) {
+        //     var mouse = d3.mouse(svg.node()).map(function(d) {
+        //         return parseInt(d);
+        //     });
+        //     tooltip.classed('hidden', false)
+        //         .attr('style', 'left:' + (mouse[0]) +
+        //                 'px; top:' + (mouse[1] + 30) + 'px')
+        //         .html(d.properties.MNIMI);
+        // })
+        // .on('mouseout', function() {
+        //     tooltip.classed('hidden', true);
+        // });
 
     g.append("path")
         .datum(topojson.mesh(data, data.objects.maakond, function(a, b) { return a !== b; }))
@@ -309,9 +301,8 @@ function drawMunicipalities(){
         .attr("y", 20)
         .style("text-anchor", "middle")
         .text(function(d, i) { return legendText[i]; });
-
-    
 }
+
 
 function clicked(d) {
     // Debug
@@ -360,33 +351,4 @@ function reset() {
 }
 
 drawCounties();
-
-
-
-// function update(year){
-//     let slider = d3.select(".slider");
-//     slider.property("value", year);
-//     d3.select(".year").text(year);
-//     // countyShapes.style("fill", function(d) {
-//     //     return color(d.properties.years[year][0].rate)
-//     // });
-//     // current_year = year;
-// }
-
-// var slider = d3.select(".slider")
-//     .append("input")
-//     .attr("type", "range")
-//     .attr("min", 1996)
-//     .attr("max", 2018)
-//     .attr("value", current_year)
-//     .attr("step", 1)
-//     .on("input", function() {
-//         var year = this.value;
-//         update(year);
-//     });
-
-// update(1996);
-
-
-
 
