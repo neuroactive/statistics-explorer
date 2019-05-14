@@ -52,128 +52,128 @@ function drawCounties() {
     function ready(error, data) {
         if (error) throw error; 
              
-    // Debug
-    console.log(data);
+        // Debug
+        console.log(data);
 
-    // Load population data
-    var counties = topojson.feature(data, {
-        type: "GeometryCollection",
-        geometries: data.objects.maakond.geometries  // counties and Estonia
-        // geometries: data.objects.omavalitsus.geometries // municipalities
-        // geometries: data.objects.asustusyksus.geometries // settlements
-    });
+        // Load population data
+        var counties = topojson.feature(data, {
+            type: "GeometryCollection",
+            geometries: data.objects.maakond.geometries  // counties and Estonia
+            // geometries: data.objects.omavalitsus.geometries // municipalities
+            // geometries: data.objects.asustusyksus.geometries // settlements
+        });
 
-    // //Tooltip for the mouseover(hover)
-    // var tooltip = d3.select('body').append('div')
-    //         .attr('class', 'hidden tooltip');
+        // //Tooltip for the mouseover(hover)
+        // var tooltip = d3.select('body').append('div')
+        //         .attr('class', 'hidden tooltip');
 
-    // Draw the map
-    g.append("g")
-        .attr("id", "counties")
-        .selectAll("path")
-        .data(counties.features)
-        .enter()
-        .append("path")
-        .attr("d", path)
-        // .attr("fill", "steelblue")
-        .attr("fill", function(d) {
-            // var value = population_data.get(d.properties.OKOOD);
-            // var value = population_data.get(d.properties.MKOOD);
-            // return (value != 0 ? population_colour(value) : "steelblue");
-            return population_colour(d.population = population_data.get(d.properties.MKOOD));
-        })
-        .on("click", clicked);
-        // .on('mousemove', function(d) {
-        //     var mouse = d3.mouse(svg.node()).map(function(d) {
-        //         return parseInt(d);
-        //     });
-        //     tooltip.classed('hidden', false)
-        //         .attr('style', 'left:' + (mouse[0]) +
-        //                 'px; top:' + (mouse[1] + 30) + 'px')
-        //         .html(d.properties.MNIMI);
-        // })
-        // .on('mouseout', function() {
-        //     tooltip.classed('hidden', true);
-        // });;
+        // Draw the map
+        g.append("g")
+            .attr("id", "counties")
+            .selectAll("path")
+            .data(counties.features)
+            .enter()
+            .append("path")
+            .attr("d", path)
+            // .attr("fill", "steelblue")
+            .attr("fill", function(d) {
+                // var value = population_data.get(d.properties.OKOOD);
+                // var value = population_data.get(d.properties.MKOOD);
+                // return (value != 0 ? population_colour(value) : "steelblue");
+                return population_colour(d.population = population_data.get(d.properties.MKOOD));
+            })
+            .on("click", clicked);
+            // .on('mousemove', function(d) {
+            //     var mouse = d3.mouse(svg.node()).map(function(d) {
+            //         return parseInt(d);
+            //     });
+            //     tooltip.classed('hidden', false)
+            //         .attr('style', 'left:' + (mouse[0]) +
+            //                 'px; top:' + (mouse[1] + 30) + 'px')
+            //         .html(d.properties.MNIMI);
+            // })
+            // .on('mouseout', function() {
+            //     tooltip.classed('hidden', true);
+            // });;
 
-    g.append("path")
-        .datum(topojson.mesh(data, data.objects.maakond, function(a, b) { return a !== b; }))
-        .attr("id", "county_borders")
-        .attr("d", path);
+        g.append("path")
+            .datum(topojson.mesh(data, data.objects.maakond, function(a, b) { return a !== b; }))
+            .attr("id", "county_borders")
+            .attr("d", path);
 
-    // var legend = svg.append("g")
-    var legend = d3.select("svg#legend")
-        .attr("id", "legend");
+        // var legend = svg.append("g")
+        var legend = d3.select("svg#legend")
+            .attr("id", "legend");
 
-    var legenditem = legend.selectAll(".legenditem")
-        .data(d3.range(6))
-        .enter()
-        .append("g")
-        .attr("class", "legenditem")
-        .attr("transform", function(d, i) { return "translate(" + i * 42 + ",0)"; });
+        var legenditem = legend.selectAll(".legenditem")
+            .data(d3.range(6))
+            .enter()
+            .append("g")
+            .attr("class", "legenditem")
+            .attr("transform", function(d, i) { return "translate(" + i * 42 + ",0)"; });
 
-    legenditem.append("rect")
-        .attr("x", width - 600)
-        .attr("y", 0)
-        .attr("width", 120)
-        .attr("height", 10)
-        .attr("class", "rect")
-        .style("fill", function(d, i) { return legendColors[i]; });
+        legenditem.append("rect")
+            .attr("x", width - 600)
+            .attr("y", 0)
+            .attr("width", 120)
+            .attr("height", 10)
+            .attr("class", "rect")
+            .style("fill", function(d, i) { return legendColors[i]; });
 
-    legenditem.append("text")
-        .attr("x", width - 600)
-        .attr("y", 20)
-        .style("text-anchor", "right")
-        .text(function(d, i) { return legendText[i]; });
-        }
+        legenditem.append("text")
+            .attr("x", width - 600)
+            .attr("y", 20)
+            .style("text-anchor", "right")
+            .text(function(d, i) { return legendText[i]; });
+    }
 
-        function clicked(d) {
-            // Debug
-            console.log("Map was clicked.");
-            if (typeof d !== 'undefined') {
-                console.log(d.properties.MNIMI);
-                vue_app.current_place_name = d.properties.MNIMI;
-                vue_app.current_place_population = parseInt(d.population,10).toLocaleString();
-            };
-        
-            if (active.node() === this) return reset();
-            active.classed("active", false);
-            active = d3.select(this).classed("active", true);
-        
-            var bounds = path.bounds(d),
-                dx = bounds[1][0] - bounds[0][0],
-                dy = bounds[1][1] - bounds[0][1],
-                x = (bounds[0][0] + bounds[1][0]) / 2,
-                y = (bounds[0][1] + bounds[1][1]) / 2,
-                scale = .9 / Math.max(dx / width, dy / height),
-                translate = [width / 2 - scale * x, height / 2 - scale * y];
-        
-            g.transition()
-                .duration(750)
-                .style("stroke-width", 1.5 / scale + "px")
-                .attr("transform", "translate(" + translate + ")scale(" + scale + ")");
-        
-                // // Debug
-                // console.log("x: " + x + ", y:" + y + " , k: " + k);
-        }
+    function clicked(d) {
+        // Debug
+        console.log("Map was clicked.");
+        if (typeof d !== 'undefined') {
+            console.log(d.properties.MNIMI);
+            vue_app.current_place_name = d.properties.MNIMI;
+            vue_app.current_place_population = parseInt(d.population,10).toLocaleString();
+        };
+    
+        if (active.node() === this) return reset();
+        active.classed("active", false);
+        active = d3.select(this).classed("active", true);
+    
+        var bounds = path.bounds(d),
+            dx = bounds[1][0] - bounds[0][0],
+            dy = bounds[1][1] - bounds[0][1],
+            x = (bounds[0][0] + bounds[1][0]) / 2,
+            y = (bounds[0][1] + bounds[1][1]) / 2,
+            scale = .9 / Math.max(dx / width, dy / height),
+            translate = [width / 2 - scale * x, height / 2 - scale * y];
+    
+        g.transition()
+            .duration(750)
+            .style("stroke-width", 1.5 / scale + "px")
+            .attr("transform", "translate(" + translate + ")scale(" + scale + ")");
+    
+            // // Debug
+            // console.log("x: " + x + ", y:" + y + " , k: " + k);
+    }
 
-        function reset() {
-            active.classed("active", false);
-            active = d3.select(null);
-        
-            g.transition()
-                .duration(500)
-                .style("stroke-width", "1.5px")
-                .attr("transform", "");
-        
-            // Reset data values to country level
-            vue_app.current_place_name = 'Estonia';
-            vue_app.current_place_population = parseInt('1317762').toLocaleString();
-        }
+    function reset() {
+        active.classed("active", false);
+        active = d3.select(null);
+    
+        g.transition()
+            .duration(500)
+            .style("stroke-width", "1.5px")
+            .attr("transform", "");
+    
+        // Reset data values to country level
+        vue_app.current_place_name = 'Estonia';
+        vue_app.current_place_population = parseInt('1317762').toLocaleString();
+    }
 }
 
 
-function updatePopulationByYear(current_year){
+function updatePopulationByYear(current_year) {
     d3.queue()
     .defer(d3.csv, "data/population_by_country.csv", function (d) {
         console.log("old one: "+current_place_population)
@@ -186,13 +186,13 @@ function updatePopulationByYear(current_year){
 }
 
 
-function updatePopulationByYearCallBack(err,data){
+function updatePopulationByYearCallBack(err,data) {
     vue_app.current_place_population = population_data['population'];
     console.log("aaa " + current_place_population)
 }
 
 
-function drawMunicipalities(){
+function drawMunicipalities() {
     // Colour
     var population_domain = [0, 1000, 5000, 10000, 20000, 50000, 100000, 500000];
     var population_colour = d3.scaleThreshold()
@@ -222,133 +222,135 @@ function drawMunicipalities(){
             }
         })
         .await(ready);
+
     var legendText = ["0", "1000", "5000", "10000", "20000", "50000", "100000", "500000"];
     var legendColors = ["#9ecae1", "#63afd7", "#4ea2d9", "#4292c6", "#2171b5", "#08519c", "#1f4884","08306b"];
 
     // Callback function
     function ready(error, data) {
         if (error) throw error;
+
         // Debug
-    console.log(data);
+        console.log(data);
 
-    // Load population data
-    var municipalities = topojson.feature(data, {
-        type: "GeometryCollection",
-        //geometries: data.objects.maakond.geometries  // counties and Estonia
-        geometries: data.objects.omavalitsus.geometries // municipalities
-        // geometries: data.objects.asustusyksus.geometries // settlements
-    });
+        // Load population data
+        var municipalities = topojson.feature(data, {
+            type: "GeometryCollection",
+            //geometries: data.objects.maakond.geometries  // counties and Estonia
+            geometries: data.objects.omavalitsus.geometries // municipalities
+            // geometries: data.objects.asustusyksus.geometries // settlements
+        });
 
-    // //Tooltip for the mouseover(hover)
-    // var tooltip = d3.select('body').append('div')
-    //         .attr('class', 'hidden tooltip');
+        // //Tooltip for the mouseover(hover)
+        // var tooltip = d3.select('body').append('div')
+        //         .attr('class', 'hidden tooltip');
 
-    // Draw the map
-    g.append("g")
-        .attr("id", "municipalities")
-        .selectAll("path")
-        .data(municipalities.features)
-        .enter()
-        .append("path")
-        .attr("d", path)
-        // .attr("fill", "steelblue")
-        .attr("fill", function(d) {
-            // var value = population_data.get(d.properties.OKOOD);
-            // var value = population_data.get(d.properties.MKOOD);
-            // return (value != 0 ? population_colour(value) : "steelblue");
-            return population_colour(d.population = population_data.get(d.properties.OKOOD));
-        })
-        .on("click", clicked);
-        // .on('mousemove', function(d) {
-        //     var mouse = d3.mouse(svg.node()).map(function(d) {
-        //         return parseInt(d);
-        //     });
-        //     tooltip.classed('hidden', false)
-        //         .attr('style', 'left:' + (mouse[0]) +
-        //                 'px; top:' + (mouse[1] + 30) + 'px')
-        //         .html(d.properties.MNIMI);
-        // })
-        // .on('mouseout', function() {
-        //     tooltip.classed('hidden', true);
-        // });
+        // Draw the map
+        g.append("g")
+            .attr("id", "municipalities")
+            .selectAll("path")
+            .data(municipalities.features)
+            .enter()
+            .append("path")
+            .attr("d", path)
+            // .attr("fill", "steelblue")
+            .attr("fill", function(d) {
+                // var value = population_data.get(d.properties.OKOOD);
+                // var value = population_data.get(d.properties.MKOOD);
+                // return (value != 0 ? population_colour(value) : "steelblue");
+                return population_colour(d.population = population_data.get(d.properties.OKOOD));
+            })
+            .on("click", clicked);
+            // .on('mousemove', function(d) {
+            //     var mouse = d3.mouse(svg.node()).map(function(d) {
+            //         return parseInt(d);
+            //     });
+            //     tooltip.classed('hidden', false)
+            //         .attr('style', 'left:' + (mouse[0]) +
+            //                 'px; top:' + (mouse[1] + 30) + 'px')
+            //         .html(d.properties.MNIMI);
+            // })
+            // .on('mouseout', function() {
+            //     tooltip.classed('hidden', true);
+            // });
 
-    g.append("path")
-        .datum(topojson.mesh(data, data.objects.maakond, function(a, b) { return a !== b; }))
-        .attr("id", "municipality_borders")
-        .attr("d", path);
+        g.append("path")
+            .datum(topojson.mesh(data, data.objects.maakond, function(a, b) { return a !== b; }))
+            .attr("id", "municipality_borders")
+            .attr("d", path);
 
-    // var legend = svg.append("g")
-    var legend = d3.select("svg#legend")
-        .attr("id", "legend");
+        // var legend = svg.append("g")
+        var legend = d3.select("svg#legend")
+            .attr("id", "legend");
 
-    var legenditem = legend.selectAll(".legenditem")
-        .data(d3.range(8))
-        .enter()
-        .append("g")
-        .attr("class", "legenditem")
-        .attr("transform", function(d, i) { return "translate(" + i * 31 + ",0)"; });
+        var legenditem = legend.selectAll(".legenditem")
+            .data(d3.range(8))
+            .enter()
+            .append("g")
+            .attr("class", "legenditem")
+            .attr("transform", function(d, i) { return "translate(" + i * 31 + ",0)"; });
 
-    legenditem.append("rect")
-        .attr("x", width - 550)
-        .attr("y", 30)
-        .attr("width", 30)
-        .attr("height", 6)
-        .attr("class", "rect")
-        .style("fill", function(d, i) { return legendColors[i]; });
+        legenditem.append("rect")
+            .attr("x", width - 550)
+            .attr("y", 30)
+            .attr("width", 30)
+            .attr("height", 6)
+            .attr("class", "rect")
+            .style("fill", function(d, i) { return legendColors[i]; });
 
-    legenditem.append("text")
-        .attr("x", width - 550)
-        .attr("y", 20)
-        .style("text-anchor", "middle")
-        .text(function(d, i) { return legendText[i]; });
+        legenditem.append("text")
+            .attr("x", width - 550)
+            .attr("y", 20)
+            .style("text-anchor", "middle")
+            .text(function(d, i) { return legendText[i]; });
+    }
+
+
+    function clicked(d) {
+        // Debug
+        console.log("Map was clicked.");
+        if (typeof d !== 'undefined') {
+            console.log(d.properties.MNIMI);
+            vue_app.current_place_name = d.properties.ONIMI;
+            vue_app.current_place_population = parseInt(d.population,10).toLocaleString();
+        };
+
+        if (active.node() === this) return reset();
+        active.classed("active", false);
+        active = d3.select(this).classed("active", true);
+
+        var bounds = path.bounds(d),
+            dx = bounds[1][0] - bounds[0][0],
+            dy = bounds[1][1] - bounds[0][1],
+            x = (bounds[0][0] + bounds[1][0]) / 2,
+            y = (bounds[0][1] + bounds[1][1]) / 2,
+            scale = .9 / Math.max(dx / width, dy / height),
+            translate = [width / 2 - scale * x, height / 2 - scale * y];
+
+        g.transition()
+            .duration(750)
+            .style("stroke-width", 1.5 / scale + "px")
+            .attr("transform", "translate(" + translate + ")scale(" + scale + ")");
+
+            // // Debug
+            // console.log("x: " + x + ", y:" + y + " , k: " + k);
+    }
+
+    function reset() {
+        active.classed("active", false);
+        active = d3.select(null);
+
+        g.transition()
+            .duration(500)
+            .style("stroke-width", "1.5px")
+            .attr("transform", "");
+
+        // Reset data values to country level
+        vue_app.current_place_name = 'Estonia';
+        vue_app.current_place_population = parseInt('1317762').toLocaleString();
+    }
 }
 
-
-function clicked(d) {
-    // Debug
-    console.log("Map was clicked.");
-    if (typeof d !== 'undefined') {
-        console.log(d.properties.MNIMI);
-        vue_app.current_place_name = d.properties.ONIMI;
-        vue_app.current_place_population = parseInt(d.population,10).toLocaleString();
-    };
-
-    if (active.node() === this) return reset();
-    active.classed("active", false);
-    active = d3.select(this).classed("active", true);
-
-    var bounds = path.bounds(d),
-        dx = bounds[1][0] - bounds[0][0],
-        dy = bounds[1][1] - bounds[0][1],
-        x = (bounds[0][0] + bounds[1][0]) / 2,
-        y = (bounds[0][1] + bounds[1][1]) / 2,
-        scale = .9 / Math.max(dx / width, dy / height),
-        translate = [width / 2 - scale * x, height / 2 - scale * y];
-
-    g.transition()
-        .duration(750)
-        .style("stroke-width", 1.5 / scale + "px")
-        .attr("transform", "translate(" + translate + ")scale(" + scale + ")");
-
-        // // Debug
-        // console.log("x: " + x + ", y:" + y + " , k: " + k);
-}
-
-function reset() {
-    active.classed("active", false);
-    active = d3.select(null);
-
-    g.transition()
-        .duration(500)
-        .style("stroke-width", "1.5px")
-        .attr("transform", "");
-
-    // Reset data values to country level
-    vue_app.current_place_name = 'Estonia';
-    vue_app.current_place_population = parseInt('1317762').toLocaleString();
-}
-
-}
 
 drawCounties();
 
