@@ -33,7 +33,7 @@ function drawCounties() {
         .on("click", clicked);
 
     var g = svg.append("g");
-    // Asynchronous tasks. Load topojson maps and data.
+    // Load TopoJSON maps and data asynchronously.
     d3.queue()
         .defer(d3.json, "data/json/counties.json")
         // .defer(d3.json, "data/json/settlements.json")
@@ -46,6 +46,7 @@ function drawCounties() {
         })
         .await(ready);
 
+    // Define legend settings
     var legendText = ["0", "5,000", "20,000", "50,000", "125,000", "500,000"];
     var legendColors = ["#C6DBEF","#9ecae1", "#63afd7", "#2171b5", "#08519c", "#08306b"];
 
@@ -58,14 +59,10 @@ function drawCounties() {
         // Load population data
         var counties = topojson.feature(data, {
             type: "GeometryCollection",
-            geometries: data.objects.maakond.geometries  // counties and Estonia
+            geometries: data.objects.maakond.geometries  // counties
             // geometries: data.objects.omavalitsus.geometries // municipalities
             // geometries: data.objects.asustusyksus.geometries // settlements
         });
-
-        // //Tooltip for the mouseover(hover)
-        // var tooltip = d3.select('body').append('div')
-        //         .attr('class', 'hidden tooltip');
 
         // Draw the map
         g.append("g")
@@ -75,26 +72,10 @@ function drawCounties() {
             .enter()
             .append("path")
             .attr("d", path)
-            // .attr("fill", "steelblue")
             .attr("fill", function(d) {
-                // var value = population_data.get(d.properties.OKOOD);
-                // var value = population_data.get(d.properties.MKOOD);
-                // return (value != 0 ? population_colour(value) : "steelblue");
                 return population_colour(d.population = population_data.get(d.properties.MKOOD));
             })
             .on("click", clicked);
-            // .on('mousemove', function(d) {
-            //     var mouse = d3.mouse(svg.node()).map(function(d) {
-            //         return parseInt(d);
-            //     });
-            //     tooltip.classed('hidden', false)
-            //         .attr('style', 'left:' + (mouse[0]) +
-            //                 'px; top:' + (mouse[1] + 30) + 'px')
-            //         .html(d.properties.MNIMI);
-            // })
-            // .on('mouseout', function() {
-            //     tooltip.classed('hidden', true);
-            // });;
 
         g.append("path")
             .datum(topojson.mesh(data, data.objects.maakond, function(a, b) { return a !== b; }))
@@ -152,9 +133,6 @@ function drawCounties() {
             .duration(750)
             .style("stroke-width", 1.5 / scale + "px")
             .attr("transform", "translate(" + translate + ")scale(" + scale + ")");
-    
-            // // Debug
-            // console.log("x: " + x + ", y:" + y + " , k: " + k);
     }
 
     function reset() {
@@ -210,6 +188,7 @@ function drawMunicipalities() {
         .on("click", clicked);
 
     var g = svg.append("g");
+    // Load TopoJSON maps and data asynchronously.
     d3.queue()
         .defer(d3.json, "data/json/municipalities.json")
         // .defer(d3.json, "data/json/settlements.json")
@@ -223,6 +202,7 @@ function drawMunicipalities() {
         })
         .await(ready);
 
+    // Define legend settings
     var legendText = ["0", "1000", "5000", "10000", "20000", "50000", "100000", "500000"];
     var legendColors = ["#9ecae1", "#63afd7", "#4ea2d9", "#4292c6", "#2171b5", "#08519c", "#1f4884","08306b"];
 
@@ -236,14 +216,10 @@ function drawMunicipalities() {
         // Load population data
         var municipalities = topojson.feature(data, {
             type: "GeometryCollection",
-            //geometries: data.objects.maakond.geometries  // counties and Estonia
+            //geometries: data.objects.maakond.geometries  // counties
             geometries: data.objects.omavalitsus.geometries // municipalities
             // geometries: data.objects.asustusyksus.geometries // settlements
         });
-
-        // //Tooltip for the mouseover(hover)
-        // var tooltip = d3.select('body').append('div')
-        //         .attr('class', 'hidden tooltip');
 
         // Draw the map
         g.append("g")
@@ -253,26 +229,10 @@ function drawMunicipalities() {
             .enter()
             .append("path")
             .attr("d", path)
-            // .attr("fill", "steelblue")
             .attr("fill", function(d) {
-                // var value = population_data.get(d.properties.OKOOD);
-                // var value = population_data.get(d.properties.MKOOD);
-                // return (value != 0 ? population_colour(value) : "steelblue");
                 return population_colour(d.population = population_data.get(d.properties.OKOOD));
             })
             .on("click", clicked);
-            // .on('mousemove', function(d) {
-            //     var mouse = d3.mouse(svg.node()).map(function(d) {
-            //         return parseInt(d);
-            //     });
-            //     tooltip.classed('hidden', false)
-            //         .attr('style', 'left:' + (mouse[0]) +
-            //                 'px; top:' + (mouse[1] + 30) + 'px')
-            //         .html(d.properties.MNIMI);
-            // })
-            // .on('mouseout', function() {
-            //     tooltip.classed('hidden', true);
-            // });
 
         g.append("path")
             .datum(topojson.mesh(data, data.objects.maakond, function(a, b) { return a !== b; }))
@@ -305,7 +265,6 @@ function drawMunicipalities() {
             .text(function(d, i) { return legendText[i]; });
     }
 
-
     function clicked(d) {
         // Debug
         console.log("Map was clicked.");
@@ -331,9 +290,6 @@ function drawMunicipalities() {
             .duration(750)
             .style("stroke-width", 1.5 / scale + "px")
             .attr("transform", "translate(" + translate + ")scale(" + scale + ")");
-
-            // // Debug
-            // console.log("x: " + x + ", y:" + y + " , k: " + k);
     }
 
     function reset() {
