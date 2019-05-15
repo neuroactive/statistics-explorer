@@ -17,82 +17,84 @@
     <link href="//fonts.googleapis.com/css?family=Ubuntu:300,400,500,700" rel="stylesheet" type="text/css">
 </head>
 <body>
-    <!-- Header bar -->
-    <nav class="navbar navbar-dark bg-inverse" id="navbar">
-            <h1>Statistics Explorer</h1>
-    </nav>
+    <div id="wrapper">
+        <!-- Header bar -->
+        <nav class="navbar navbar-dark bg-inverse" id="navbar">
+                <h1>Statistics Explorer</h1>
+        </nav>
 
-    <!-- Page content -->
-    <div class="container-fluid mt-2" id="content">
+        <!-- Page content -->
+        <div class="container-fluid mt-2" id="content">
 
-        <!-- Navigation tabs -->
-        <ul class="nav nav-tabs" style="padding-left: 45px">
-            <li class="nav-item">
-                <a class="nav-link active" data-toggle="tab" href="#demographics">Demographics</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" data-toggle="tab" href="#economics">Economics</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" data-toggle="tab" href="#health">Health</a>
-            </li>
-        </ul>
+            <!-- Navigation tabs -->
+            <ul class="nav nav-tabs" style="padding-left: 45px">
+                <li class="nav-item">
+                    <a class="nav-link active" data-toggle="tab" href="#demographics">Demographics</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-toggle="tab" href="#economics">Economics</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-toggle="tab" href="#health">Health</a>
+                </li>
+            </ul>
 
-        <!-- Tab content -->
-        <div class="tab-content">
-            <div id="demographics" class="tab-pane active">
-                <div class="row container-fluid">
-                    <!-- Column containing map -->
-                    <div style="width:600px; padding-left: 20px;">
-                        <!--Details-->
-                        <div style="width: 250px; padding-left: 35px; padding-bottom: 15px; float: left">
-                            <p style="margin-bottom: 0.6rem !important"><b style="font-size: 1.5rem !important; font-weight: 600 !important;">Level of detail</b></p>
-                            <label class="btn">
-                                <input type="radio" name="options" @change="changeMap()" v-model="zoomLevel" value="county"> County
-                            </label><br>
-                            <label class="btn">
-                                <input type="radio" name="options"  @change="changeMap()" v-model="zoomLevel" value="municipality"> Municipality
-                            </label>
-                        </div>
-                        <div style="float: right; width: 250px;">
-                            <h2 class="year">{{ current_year }}</h2>
-                            <div class="slider">
-                                <input type="range" min="2012" max="2018" step="1" v-model="current_year" @input="changePyramid();updatePopulation()" style="width: 250px; margin-bottom: 12px !important">
+            <!-- Tab content -->
+            <div class="tab-content">
+                <div id="demographics" class="tab-pane active">
+                    <div class="row container-fluid">
+                        <!-- Column containing map -->
+                        <div style="width:600px; padding-left: 20px;">
+                            <!--Details-->
+                            <div style="width: 250px; padding-left: 35px; padding-bottom: 15px; float: left">
+                                <p style="margin-bottom: 0.6rem !important"><b style="font-size: 1.5rem !important; font-weight: 600 !important;">Level of detail</b></p>
+                                <label class="btn">
+                                    <input type="radio" name="options" @change="changeMap()" v-model="zoomLevel" value="county"> County
+                                </label><br>
+                                <label class="btn">
+                                    <input type="radio" name="options"  @change="changeMap()" v-model="zoomLevel" value="municipality"> Municipality
+                                </label>
                             </div>
-                            <div style="height: 40px !important; margin-top: 25px">
-                                <svg id="legend" style="height: 40px !important"></svg>
+                            <div style="float: right; width: 250px;">
+                                <h2 class="year">{{ current_year }}</h2>
+                                <div class="slider">
+                                    <input type="range" min="2012" max="2018" step="1" v-model="current_year" @input="changePyramid();updatePopulation()" style="width: 250px; margin-bottom: 12px !important">
+                                </div>
+                                <div style="height: 40px !important; margin-top: 25px">
+                                    <svg id="legend" style="height: 40px !important"></svg>
+                                </div>
                             </div>
+                            <!-- Map -->
+                            <svg class="map_population" width="600" height="500"></svg>
                         </div>
-                        <!-- Map -->
-                        <svg class="map_population" width="600" height="500"></svg>
-                    </div>
-                    <!-- Statistics for the selected region -->
-                    <div class="col-6" style="padding-left: 50px">
-                        <h1>{{ current_place_name }}</h1>
+                        <!-- Statistics for the selected region -->
+                        <div class="col-6" style="padding-left: 50px">
+                            <h1>{{ current_place_name }}</h1>
 
-                        <p><b>Population:</b><br>
-                        {{ current_place_population }}</p>
+                            <p><b>Population:</b><br>
+                            {{ current_place_population }}</p>
 
-                        <div id="pyramid" v-show="current_place_name === 'Estonia'"></div>
+                            <div id="pyramid" v-show="current_place_name === 'Estonia'"></div>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div id="economics" class="container tab-pane fade"><br>
-                <h3>Menu 1</h3>
-                <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-                    consequat.</p>
-            </div>
-            <div id="health" class="container tab-pane fade"><br>
-                <h3>Menu 2</h3>
-                <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam
-                    rem aperiam.</p>
+                <div id="economics" class="container tab-pane fade"><br>
+                    <h3>Menu 1</h3>
+                    <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+                        consequat.</p>
+                </div>
+                <div id="health" class="container tab-pane fade"><br>
+                    <h3>Menu 2</h3>
+                    <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam
+                        rem aperiam.</p>
+                </div>
             </div>
         </div>
-    </div>
 
-    <footer class="footer">
-        <p>&copy; 2019 <a href="https://neuroactive.ai/">Neuroactive AI</a>. Created as part of the <a href="https://garage48.org/events/garage48-visualising-data">Garage48 Visualising Data</a> hackathon.</p>
-    </footer>
+        <footer class="footer">
+            <p>&copy; 2019 <a href="https://neuroactive.ai/">Neuroactive AI</a>. Created as part of the <a href="https://garage48.org/events/garage48-visualising-data">Garage48 Visualising Data</a> hackathon.</p>
+        </footer>
+    </div>
 
     <!-- JavaScript required for Bootstrap. See: https://getbootstrap.com/docs/4.1/getting-started/introduction/#quick-start)  -->
     <!-- jQuery -->
