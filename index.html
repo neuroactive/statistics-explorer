@@ -14,21 +14,16 @@
     <!-- Vue.js -->
     <script src="//cdnjs.cloudflare.com/ajax/libs/vue/2.5.1/vue.js"></script>
     <!-- Web fonts -->
-    <link href="//fonts.googleapis.com/css?family=Roboto:300|Ubuntu:300,400,500,700" rel="stylesheet" type="text/css">
+    <link href="//fonts.googleapis.com/css?family=Ubuntu:300,400,500,700" rel="stylesheet" type="text/css">
 </head>
 <body>
     <!-- Header bar -->
-    <nav class="navbar navbar-light">
-        <a class="navbar-brand pl-3 mt-2" href="#">
-            <img src="img/nai_trans.png" height="50" alt="Neuroactive AI logo" style="padding-left: 30px">
-        </a>
-        <div class="topnav-centered">
-            <h1 class="text-dark" style="margin-bottom: 0 !important">Estonian Statistics Explorer</h1>
-        </div>
+    <nav class="navbar navbar-dark bg-inverse" id="navbar">
+            <h1>Statistics Explorer</h1>
     </nav>
 
     <!-- Page content -->
-    <div class="container-fluid mt-2" id="content" style="padding-left: 0; padding-right: 0">
+    <div class="container-fluid mt-2" id="content">
 
         <!-- Navigation tabs -->
         <ul class="nav nav-tabs" style="padding-left: 45px">
@@ -51,10 +46,7 @@
                     <div style="width:600px; padding-left: 20px;">
                         <!--Details-->
                         <div style="width: 250px; padding-left: 35px; padding-bottom: 15px; float: left">
-                            <p style="font-size: 1.4rem"><b>Level of detail</b></p>
-                            <label class="btn">
-                                <input type="radio" name="options" @change="changeMap()" v-model="zoomLevel" value="country"> Country
-                            </label><br>
+                            <p style="margin-bottom: 0.6rem !important"><b style="font-size: 1.5rem !important; font-weight: 600 !important;">Level of detail</b></p>
                             <label class="btn">
                                 <input type="radio" name="options" @change="changeMap()" v-model="zoomLevel" value="county"> County
                             </label><br>
@@ -98,7 +90,9 @@
         </div>
     </div>
 
-    </div>
+    <footer class="footer">
+        <p>&copy; 2019 <a href="https://neuroactive.ai/">Neuroactive AI</a>. Created as part of the <a href="https://garage48.org/events/garage48-visualising-data">Garage48 Visualising Data</a> hackathon.</p>
+    </footer>
 
     <!-- JavaScript required for Bootstrap. See: https://getbootstrap.com/docs/4.1/getting-started/introduction/#quick-start)  -->
     <!-- jQuery -->
