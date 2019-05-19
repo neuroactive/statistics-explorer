@@ -167,3 +167,7 @@ footer p {
 a {
     color: #0000CC !important;
 }
+
+#credits {
+    padding-left: 30px;
+}
