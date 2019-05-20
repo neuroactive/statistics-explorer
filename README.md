@@ -4,5 +4,5 @@ Statistics Explorer is a prototype of an application which enables the user to b
 
 It was put together within 24 hours at the [Garage48 Visualising Data hackathon](http://garage48.org/events/garage48-visualising-data).
 
-Live demo:
+Live demo:  
 https://neuroactive.github.io/statistics-explorer/
