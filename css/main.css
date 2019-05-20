@@ -31,7 +31,7 @@ h1 {
 }
 
 #navbar {
-    background-image: url('img/header_dark_right.png'), url('img/header_dark_left.png');
+    background-image: url('../img/header_dark_right.png'), url('../img/header_dark_left.png');
     background-repeat: no-repeat, no-repeat;
     background-position: right -80px top, -20px 0;
 }
@@ -98,15 +98,6 @@ path {
 .hidden {
     display: none;
 }
-/*div.tooltip {
-    color: #222;
-    background-color: #fff;
-    padding: .5em;
-    text-shadow: #f5f5f5 0 1px 0;
-    border-radius: 2px;
-    opacity: 0.9;
-    position: absolute;
-}*/
 
 #pyramid {
     width: 600px;
@@ -142,10 +133,6 @@ path {
     font-size: 1.4rem !important;
 }
 
-/*svg.map_population {
-    position: relative;
-    top: -10px;
-}*/
 .bar {
     fill-opacity: 0.9 !important;
 }
