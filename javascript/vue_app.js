@@ -2,7 +2,7 @@ var current_year = 2018;
 var current_place_name = 'Estonia';
 var current_place_population = 1317762;
 var zoomLevel = 'county';
-var json = $.getJSON({'url': "data/json/population.json", 'async': false});
+var json = $.getJSON({'url': "../data/json/population.json", 'async': false});
 
 
 // Initialize Vue app
