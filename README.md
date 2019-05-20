@@ -1,4 +1,4 @@
-# statistics-explorer
+# Statistics Explorer
 
 Statistics Explorer is a prototype of an application which enables the user to browse statistics about different regions of Estonia using an interactive map.
 
